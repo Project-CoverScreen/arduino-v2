@@ -34,10 +34,14 @@ void TFTController::setActive()
 	digitalWrite(SD_CS, false);
 }
 
+void TFTController::turnScreen(bool on)
+{
+	digitalWrite(TFT_BL, on ? HIGH : LOW);
+}
+
 void TFTController::drawLine(int line_number, uint16_t* line_data)
 {
 	this->setActive();
-	Serial.println("Drawing line " + String(line_number));
 	tft.startWrite();
 	tft.setAddrWindow(0, line_number, 240, 1);
 	tft.writePixels(line_data, 240);

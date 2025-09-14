@@ -21,8 +21,8 @@ public:
 		this->packet->direction = DIRECTION_ESP_TO_DEVICE;
 
 		FileController::Singleton()->readLines(this->packet->file_hash, 0, 2);
-
-		auto numbers_of_lines = 2;
+		TFTController::Singleton()->turnScreen(false);
+		auto numbers_of_lines = 4;
 		for (int i = 0; i < 240; i)
 		{
 			// first: read it
@@ -34,6 +34,7 @@ public:
 
 			i += numbers_of_lines;
 		}
+		TFTController::Singleton()->turnScreen(true);
 
 
 		this->packet->success = true; // TO:DO 

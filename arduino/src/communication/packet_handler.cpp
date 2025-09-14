@@ -49,7 +49,7 @@ std::vector<uint8_t> PacketHandler::onPacketReceived(const uint8_t* data, uint16
 			}
 			auto casted_packet = (FileWritePacket*)data;
 			answer = (FileStartWritePacketHandler(casted_packet)).handle()->serialize();
-			Serial.printf("Received FileWritePacket for file %u\n", casted_packet->file_hash);
+			//Serial.printf("Received FileWritePacket for file %u\n", casted_packet->file_hash);
 
 			break;
 		}
@@ -62,7 +62,7 @@ std::vector<uint8_t> PacketHandler::onPacketReceived(const uint8_t* data, uint16
 			}
 			auto casted_packet = (FileDisplayPacket*)data;
 			answer = (FileDisplayPacketHandler(casted_packet)).handle()->serialize();
-			Serial.printf("Received FileDisplayPacket for file %u\n", casted_packet->file_hash);
+			//Serial.printf("Received FileDisplayPacket for file %u\n", casted_packet->file_hash);
 			break;
 		}
 	}

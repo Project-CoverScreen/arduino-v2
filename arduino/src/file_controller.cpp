@@ -85,7 +85,7 @@ bool FileController::appendToFile(uint32_t filename, const uint8_t* data, size_t
 
 	auto size_wrote = file.write((uint8_t*)data, length);
 	file.close();
-	Serial.printf("Wrote %u/%u bytes to file %s\n", size_wrote, length, FILEHASH_TO_NAME(filename));
+	//Serial.printf("Wrote %u/%u bytes to file %s\n", size_wrote, length, FILEHASH_TO_NAME(filename));
 	return size_wrote == length;
 
 }

@@ -19,7 +19,7 @@ bool BluetoothController::Initialize() {
 	}
 	NimBLEDevice::setDeviceName(DEVICE_NAME);     
 	NimBLEDevice::setPower(ESP_PWR_LVL_P6);
-	NimBLEDevice::setMTU(512);
+	NimBLEDevice::setMTU(517);
 	packetHandler = PacketHandler();
 	server = NimBLEDevice::createServer();
 	if(!server) {
@@ -92,10 +92,10 @@ void RxCallbacks::onWrite(NimBLECharacteristic* chr, NimBLEConnInfo& conn)
 	if (response.size())
 	{
 		Serial.printf("Sending response (%d bytes): \n", response.size());
-		for(int i = 0; i < response.size(); i++)
-		{
-			Serial.printf("%02X ", response[i]);
-		}
+		//for(int i = 0; i < response.size(); i++)
+		//{
+		//	Serial.printf("%02X ", response[i]);
+		//}
 		chr->notify(response.data(), response.size(), conn.getConnHandle());
 	}
 }
