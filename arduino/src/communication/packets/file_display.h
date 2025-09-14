@@ -19,10 +19,10 @@ public:
 	FileDisplayPacketHandler* handle()
 	{
 		this->packet->direction = DIRECTION_ESP_TO_DEVICE;
-
+		auto start = esp_timer_get_time();
 		FileController::Singleton()->readLines(this->packet->file_hash, 0, 2);
-		TFTController::Singleton()->turnScreen(false);
-		auto numbers_of_lines = 4;
+		//TFTController::Singleton()->turnScreen(false);
+		auto numbers_of_lines = 60;
 		for (int i = 0; i < 240; i)
 		{
 			// first: read it
@@ -34,9 +34,10 @@ public:
 
 			i += numbers_of_lines;
 		}
-		TFTController::Singleton()->turnScreen(true);
+		//TFTController::Singleton()->turnScreen(true);
 
-
+		auto end = esp_timer_get_time();
+		Serial.printf("Displayed image %u in %.2f seconds\n", this->packet->file_hash, (end - start) / 1000000.0);
 		this->packet->success = true; // TO:DO 
 		return this;
 	}

@@ -9,4 +9,5 @@ public:
 public:
 	void turnScreen(bool on);
 	void drawLine(int line_number, uint16_t* line_data);
+	void fillScreen(uint16_t color);
 };

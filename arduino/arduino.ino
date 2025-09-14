@@ -36,17 +36,7 @@ void setup() {
 		return error();
 
 
-	auto test = malloc(240 * 2);
-
-	for (int i = 0; i < 240; i++)
-	{
-		srand(i * 123456789);
-		uint16_t val = uint16_t(esp_random() & 0xFFFF);
-		for (int y = 0; y < 240; y++)
-			((uint16_t*)test)[y] = val;
-		tft_ctrl.drawLine(i, (uint16_t*)test);
-	}
-	free(test);
+	tft_ctrl.fillScreen(0x07FF);
 
 }
 

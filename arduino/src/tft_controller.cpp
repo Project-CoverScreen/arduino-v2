@@ -48,3 +48,9 @@ void TFTController::drawLine(int line_number, uint16_t* line_data)
 	tft.endWrite();
 }
 
+void TFTController::fillScreen(uint16_t color)
+{
+	this->setActive();
+	tft.fillScreen(color);
+}
+
