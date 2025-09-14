@@ -8,9 +8,4 @@ struct PacketBase {
 	PacketDirection direction;
 	PacketType type;
 };
-struct InternalPacketAnswer
-{
-	int size;
-	unsigned char* buffer;
-};
 #pragma pack(pop)
