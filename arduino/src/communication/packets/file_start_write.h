@@ -4,9 +4,9 @@
 #pragma pack(push, 1)
 #include <vector>
 #include <unordered_map>
+#pragma pack(push, 1)
 struct FileWritePacket : PacketBase {
 	uint32_t file_hash;
-	uint16_t crc;
 	uint16_t line_data[240]; // 240 pixels
 };
 struct FileWriteResponsePacket : PacketBase {
@@ -14,7 +14,7 @@ struct FileWriteResponsePacket : PacketBase {
 };
 #pragma pack(pop)
 
-static_assert(sizeof(FileWritePacket) == sizeof(PacketBase) + sizeof(unsigned int) + sizeof(uint16_t) + sizeof(uint16_t) * 240, "FileWritePacket size is not 496 bytes");
+static_assert(sizeof(FileWritePacket) == sizeof(PacketBase) + sizeof(unsigned int) + sizeof(uint16_t) * 240, "FileWritePacket size is not 490 bytes");
 static constexpr size_t kLineBytes = sizeof(uint16_t) * 240;           // 480
 static constexpr size_t kImageBytes = kLineBytes * 240;                  // 115200
 

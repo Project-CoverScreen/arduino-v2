@@ -44,12 +44,11 @@ std::vector<uint8_t> PacketHandler::onPacketReceived(const uint8_t* data, uint16
 		{
 			if (length != sizeof(FileWritePacket))
 			{
-				Serial.println("Invalid FileWritePacket size");
+				Serial.printf("Invalid FileWritePacket size %d\n", length);
 				return {};
 			}
 			auto casted_packet = (FileWritePacket*)data;
 			answer = (FileStartWritePacketHandler(casted_packet)).handle()->serialize();
-			//Serial.printf("Received FileWritePacket for file %u\n", casted_packet->file_hash);
 
 			break;
 		}
@@ -62,7 +61,6 @@ std::vector<uint8_t> PacketHandler::onPacketReceived(const uint8_t* data, uint16
 			}
 			auto casted_packet = (FileDisplayPacket*)data;
 			answer = (FileDisplayPacketHandler(casted_packet)).handle()->serialize();
-			//Serial.printf("Received FileDisplayPacket for file %u\n", casted_packet->file_hash);
 			break;
 		}
 	}
