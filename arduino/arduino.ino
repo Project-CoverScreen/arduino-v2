@@ -36,7 +36,17 @@ void setup() {
 		return error();
 
 
-	tft_ctrl.fillScreen(0x07FF);
+	FileController::Singleton()->readLines(0x3AA2D0AF, 0, 2);
+	auto numbers_of_lines = 60;
+	for (int i = 0; i < 240; i)
+	{
+		auto drawData = FileController::Singleton()->readLines(0x3AA2D0AF, i, numbers_of_lines);
+
+		for (int y = 0; y < numbers_of_lines; y++)
+			TFTController::Singleton()->drawLine(i + y, (uint16_t*)drawData.data() + (y * 240));
+
+		i += numbers_of_lines;
+	}
 
 }
 

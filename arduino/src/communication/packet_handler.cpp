@@ -5,6 +5,7 @@
 #include "packets/health_status.h"
 #include "packets/file_start_write.h"
 #include "packets/file_display.h"
+#include "packets/file_exists.h"
 #include "../file_controller.h"
 
 std::vector<uint8_t> PacketHandler::onPacketReceived(const uint8_t* data, uint16_t length)
@@ -38,6 +39,17 @@ std::vector<uint8_t> PacketHandler::onPacketReceived(const uint8_t* data, uint16
 			auto casted_packet = (HealthStatusPacket*)data;
 			answer = (HealthStatusPacketHandler(casted_packet)).handle(HealthStatus::HEALTH_OK)->serialize();
 			Serial.printf("Received HealthStatusPacket: status=%d\n", ((HealthStatusPacket*)answer.data())->status);
+			break;
+		}
+		case PacketType::PACKET_FILE_EXISTS:
+		{
+			if (length != sizeof(FileExistsPacket))
+			{
+				Serial.printf("Invalid FileExistsPacket size %d\n", length);
+				return {};
+			}
+			auto casted_packet = (FileExistsPacket*)data;
+			answer = (FileExistsPacketHandler(casted_packet)).handle()->serialize();
 			break;
 		}
 		case PacketType::PACKET_FILE_WRITE:
