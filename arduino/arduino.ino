@@ -18,6 +18,19 @@ void error()
 	ESP.restart();
 }
 
+void printLogo(const uint16_t name) {
+	auto numbers_of_lines = 240;
+	for (int i = 0; i < 240; i)
+	{
+		auto drawData = FileController::Singleton()->readLines(name, i, numbers_of_lines);
+
+		for (int y = 0; y < numbers_of_lines; y++)
+			TFTController::Singleton()->drawLine(i + y, (uint16_t*)drawData.data() + (y * 240));
+
+		i += numbers_of_lines;
+	}
+}
+
 void setup() {
 	Serial.begin(115200);
 	sleep(2);
@@ -35,22 +48,10 @@ void setup() {
 	if(!tft_ctrl.Initialize())
 		return error();
 
-
-	FileController::Singleton()->readLines(0x3AA2D0AF, 0, 2);
-	auto numbers_of_lines = 60;
-	for (int i = 0; i < 240; i)
-	{
-		auto drawData = FileController::Singleton()->readLines(0x3AA2D0AF, i, numbers_of_lines);
-
-		for (int y = 0; y < numbers_of_lines; y++)
-			TFTController::Singleton()->drawLine(i + y, (uint16_t*)drawData.data() + (y * 240));
-
-		i += numbers_of_lines;
-	}
+	printLogo(0x1);
 
 }
 
 void loop() {
 
-	
 }

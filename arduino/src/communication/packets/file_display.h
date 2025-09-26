@@ -22,7 +22,7 @@ public:
 		auto start = esp_timer_get_time();
 		FileController::Singleton()->readLines(this->packet->file_hash, 0, 2);
 		//TFTController::Singleton()->turnScreen(false);
-		auto numbers_of_lines = 60;
+		auto numbers_of_lines = 240;
 		for (int i = 0; i < 240; i)
 		{
 			// first: read it
