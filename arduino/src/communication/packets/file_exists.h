@@ -18,7 +18,7 @@ public:
 	FileExistsPacketHandler* handle()
 	{
 		this->packet->direction = DIRECTION_ESP_TO_DEVICE;
-		this->packet->exists = FileController::Singleton()->exists(this->packet->file_hash);
+		this->packet->exists =/* FileController::Singleton()->exists(this->packet->file_hash)*/false;
 
 		return this;
 	}

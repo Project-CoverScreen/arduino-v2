@@ -39,8 +39,8 @@ void setup() {
 	pinMode(TFT_CS, OUTPUT);
 	pinMode(SD_CS, OUTPUT);
 
-	if (!file_ctrl.Initialize())
-		return error();
+	//if (!file_ctrl.Initialize())
+	//	return error();
 
 	if (!ble_ctrl.Initialize())
 		return error();
@@ -48,7 +48,7 @@ void setup() {
 	if(!tft_ctrl.Initialize())
 		return error();
 
-	printLogo(0x1);
+	//printLogo(0x1);
 
 }
 

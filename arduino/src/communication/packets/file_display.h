@@ -19,26 +19,26 @@ public:
 	FileDisplayPacketHandler* handle()
 	{
 		this->packet->direction = DIRECTION_ESP_TO_DEVICE;
-		auto start = esp_timer_get_time();
-		FileController::Singleton()->readLines(this->packet->file_hash, 0, 2);
-		//TFTController::Singleton()->turnScreen(false);
-		auto numbers_of_lines = 240;
-		for (int i = 0; i < 240; i)
-		{
-			// first: read it
-			auto drawData = FileController::Singleton()->readLines(this->packet->file_hash, i, numbers_of_lines);
+		//auto start = esp_timer_get_time();
+		//FileController::Singleton()->readLines(this->packet->file_hash, 0, 2);
+		////TFTController::Singleton()->turnScreen(false);
+		//auto numbers_of_lines = 240;
+		//for (int i = 0; i < 240; i)
+		//{
+		//	// first: read it
+		//	auto drawData = FileController::Singleton()->readLines(this->packet->file_hash, i, numbers_of_lines);
 
-			// second: draw (them?) 
-			for(int y = 0; y < numbers_of_lines; y++)
-				TFTController::Singleton()->drawLine(i + y, (uint16_t*)drawData.data() + (y * 240));
+		//	// second: draw (them?) 
+		//	for(int y = 0; y < numbers_of_lines; y++)
+		//		TFTController::Singleton()->drawLine(i + y, (uint16_t*)drawData.data() + (y * 240));
 
-			i += numbers_of_lines;
-		}
-		//TFTController::Singleton()->turnScreen(true);
+		//	i += numbers_of_lines;
+		//}
+		////TFTController::Singleton()->turnScreen(true);
 
-		auto end = esp_timer_get_time();
-		Serial.printf("Displayed image %u in %.2f seconds\n", this->packet->file_hash, (end - start) / 1000000.0);
-		this->packet->success = true; // TO:DO 
+		//auto end = esp_timer_get_time();
+		//Serial.printf("Displayed image %u in %.2f seconds\n", this->packet->file_hash, (end - start) / 1000000.0);
+		this->packet->success = false; // TO:DO 
 		return this;
 	}
 

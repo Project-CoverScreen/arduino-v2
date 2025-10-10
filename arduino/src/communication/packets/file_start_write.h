@@ -2,6 +2,7 @@
 #include "../../vendor/crc32.h"
 #include "../packet_base.h"
 #include "../../file_controller.h"
+#include "../../tft_controller.h"
 #pragma pack(push, 1)
 #include <vector>
 #include <unordered_map>
@@ -18,7 +19,7 @@ static constexpr size_t kImageBytes = kLineBytes * 240;                  // 1152
 
 inline std::unordered_map<uint32_t, std::vector<uint8_t>> file_write_buffers;
 int last_image_id = 0;
-
+int line_count_debug = 0;
 class FileStartWritePacketHandler {
 private:
 	FileWritePacket* packet;
@@ -47,9 +48,14 @@ public:
 			auto crc_value = crc.finalize();
 
 			if (crc_value == this->packet->file_hash)
-				is_success = FileController::Singleton()->overwriteToFile(packet->file_hash,
-					buf.data(),
-					buf.size());
+				is_success = true;
+
+			if (is_success)
+			{
+				for(int i = 0; i < 240; i++)
+					TFTController::Singleton()->drawLine(i, (uint16_t*)&buf[(240 * 2) * i]);
+
+			}
 
 			file_write_buffers.erase(packet->file_hash);
 		}
